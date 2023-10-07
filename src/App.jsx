@@ -18,8 +18,12 @@ function App() {
 
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element = {<RootLayout/>}>
-        <Route index element = {<Home/>}/>
+      <Route path = "/" element = {<RootLayout/>}>
+        <Route 
+          index 
+          element = {<Home/>}
+          // loader = {homeLoader}
+        />
         <Route path="create" element = {<Create/>}/>
         <Route path="search" element = {<Search/>}/>
         <Route path="recipe" element = {<RecipeLayout/>}>
