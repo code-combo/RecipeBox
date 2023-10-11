@@ -1,4 +1,3 @@
-
 import { useFetch } from "../../hooks/useFetch";
 
 // styles
@@ -15,7 +14,6 @@ export default function Home() {
       {error && <p className="error">{error}</p>}
       {isPending && <p className="loading">Loading...</p>}
       {data && <RecipeList recipes = {data}/>}
-
     </div>
   )
 }

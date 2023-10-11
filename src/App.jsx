@@ -22,23 +22,17 @@ function App() {
         <Route 
           index 
           element = {<Home/>}
-          // loader = {homeLoader}
         />
         <Route path="create" element = {<Create/>}/>
         <Route path="search" element = {<Search/>}/>
-        <Route path="recipe" element = {<RecipeLayout/>}>
-          <Route 
-          path = ":id" 
-          element = {<Recipe/>}
-          />
-        </Route>
+        {/* <Route path="recipe" element = {<RecipeLayout/>}> */}
+          <Route path = "recipe/:id" element = {<Recipe/>}/>
+        {/* </Route> */}
       </Route>
     )
   )
 
   return (
-    // <div className="App">
-    // </div>
     <RouterProvider router = {router}/>
   )
 }
