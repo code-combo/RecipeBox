@@ -1,61 +1,60 @@
-import { useEffect, useState, useRef } from 'react'
+import { useState, useEffect } from "react"
 
-export const useFetch = (url, _options) => {
-    
-    const [data, setData] = useState(null);
-    const [isPending, setIsPending] = useState(false);
-    const [error, setError] = useState(null);
+export const useFetch = (url, method = "GET") => {
+  const [data, setData] = useState(null)
+  const [isPending, setIsPending] = useState(false)
+  const [error, setError] = useState(null)
+  const [options, setOptions] = useState(null)
 
-    // use useRef to wrap an object/array argument (refrebce types)
-    //  which is a useEffect dependency
+  const postData = (postData) => {
+    setOptions({
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(postData)
+    })
+  }
 
-    const options = useRef(_options).current;
+  useEffect(() => {
+    const controller = new AbortController()
 
-    useEffect(() => {
-
-        const controller = new AbortController();
-
-        const fetchData = async () => {
-
-            console.log(options);
-            setIsPending(true);
-
-            try {
-                const res = await fetch(url, { signal: controller.signal });
-
-                console.log(res);
-
-                if(!res.ok) {
-                    throw new Error(res.statusText);
-                }
-
-                const json = await res.json();
-    
-                setIsPending(false);
-    
-                setData(json);
-                setError(null);
-            } catch (err) {
-
-                if(err.name === "AbortError") {
-                    console.log('the fetch was aborted');
-                } else {
-                    setIsPending(false);
-                    setError('could not fetch data');
-                    console.log(err.message);
-                }
-
-            }
+    const fetchData = async (fetchOptions) => {
+      setIsPending(true)
+      
+      try {
+        const res = await fetch(url, { ...fetchOptions, signal: controller.signal })
+        if(!res.ok) {
+          throw new Error(res.statusText)
         }
+        const data = await res.json()
 
-        fetchData();
-
-        return () => {
-            controller.abort();
+        setIsPending(false)
+        setData(data)
+        setError(null)
+      } catch (err) {
+        if (err.name === "AbortError") {
+          console.log("the fetch was aborted")
+        } else {
+          setIsPending(false)
+          setError('Could not fetch the data')
         }
+      }
+    }
 
-    }, [url, options]);
+    // invoke the function
+    if (method === "GET") {
+      fetchData()
+    }
+    if (method === "POST" && options) {
+      fetchData(options)
+    }
 
-    return { data, isPending, error }
+    return () => {
+      controller.abort()
+    }
 
+  }, [url, method, options])
+
+  return { data, isPending, error, postData }
 }

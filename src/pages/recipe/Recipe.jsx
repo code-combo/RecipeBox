@@ -49,7 +49,7 @@ export default function Recipe() {
           {recipe.ingredients && recipe.ingredients.length > 0 ? (
             <ul>
               {recipe.ingredients.map((ing, index) => (
-                <li key={index}>{ing}</li>
+                <li key={ing}>{ing}</li>
               ))}
             </ul>
           ) : (

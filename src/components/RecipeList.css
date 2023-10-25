@@ -25,6 +25,19 @@
     margin-bottom: 6px;
 }
 
+.del-btn {
+    background: #58249c;
+    padding: .5rem .9rem;
+    border-radius: 25px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    position: absolute;
+    right: 1rem;
+    top: 1.3rem;
+}
+
 .recipe-list .card p {
     color: #999;
     font-size: 0.9em;
