@@ -4,6 +4,8 @@ import { useState, useEffect } from "react"
 import "./Create.css"
 import { useFetch } from "../../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "../../hooks/useTheme";
+// import { useTheme } from "../../hooks/useTheme";
 
 export default function Create() {
 
@@ -12,6 +14,8 @@ export default function Create() {
   const [cookingTime, setCookingTime] = useState("");
   const [newIngredient, setNewIngredient] = useState("")
   const [ingredients, setIngredients] = useState([]);
+
+  const { mode } = useTheme()
   // const ingredientInput = useRef(null);
   const navigate = useNavigate();
 
@@ -44,10 +48,12 @@ export default function Create() {
     if(data){
       navigate("/");
     }
-  }, [data])
+  }, [data]);
+
+  // const { color } = useTheme();
 
   return (
-    <div className="create">
+    <div className={`create ${mode}`}>
       <h2 className="page-title">Add A New Recipe</h2>
 
       <form onSubmit = {handleSubmit}>

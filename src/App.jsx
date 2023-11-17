@@ -14,7 +14,12 @@ import Search from "./pages/search/Search"
 import RecipeLayout from "./Layouts/RecipeLayout"
 import Recipe from "./pages/recipe/Recipe"
 
+// custom hooks
+import { useTheme } from "./hooks/useTheme"
+
 function App() {
+
+  const { mode } = useTheme()
 
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -24,6 +29,7 @@ function App() {
           element = {<Home/>}
         />
         <Route path="create" element = {<Create/>}/>
+        {/* <ThemeSelector/> */}
         <Route path="search" element = {<Search/>}/>
         {/* <Route path="recipe" element = {<RecipeLayout/>}> */}
           <Route path = "recipe/:id" element = {<Recipe/>}/>

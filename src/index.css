@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800&display=swap');
 
-/* base styles */
 html, body, #root {
   height: 100%;
 }
@@ -10,7 +9,13 @@ body {
   font-size: 1.4em;
   background: #dfdfdf;
   color: #333;
+  transition: all .3s ease-in-out;
 }
+
+.dark {
+  background: #333;
+}
+
 h1,h2,h3,p {
   margin: 0;
 }
@@ -28,7 +33,7 @@ input, textarea {
 .page-title {
   text-align: center;
   margin: 40px auto;
-  color: #333;
+  /* color: #333; */
 }
 .loading, .error {
   text-align: center;

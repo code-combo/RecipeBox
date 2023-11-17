@@ -1,0 +1,2 @@
+i still dont understand the color changes, lemme break down my question.
+okay, we destructured color, state and changeColor from the useTheme hook. we gave the div with a classname of navbar a style of background color to be color, which was what we destructured
